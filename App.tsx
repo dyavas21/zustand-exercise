@@ -1,10 +1,29 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Button, FlatList, StyleSheet, Text, View } from 'react-native';
+import useUsers from './src/store/Users';
 
 export default function App() {
+  const { users, execute } = useUsers(state => state);
+
+  const teken = () => {
+    execute('https://jsonplaceholder.typicode.com/todos');
+  };
   return (
     <View style={styles.container}>
-      <Text>Open up App.tsx to start test on your app!</Text>
+      <Button title='API' onPress={teken} />
+      {console.log('index', users)}
+      <FlatList
+        data={users}
+        keyExtractor={({ id }, index) => id}
+        renderItem={({ item }) => {
+          return (
+            <View>
+              <Text>{item.id}</Text>
+              <Text>{item.title}</Text>
+            </View>
+          );
+        }}
+      />
       <StatusBar style='auto' />
     </View>
   );
