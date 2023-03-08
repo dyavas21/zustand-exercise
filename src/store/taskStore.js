@@ -1,6 +1,7 @@
 import { create } from 'zustand';
-import { devtools, persist } from 'zustand/middleware';
+import { createJSONStorage, devtools, persist } from 'zustand/middleware';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // const useUsers = create(
 //   devtools(set => ({
@@ -30,6 +31,7 @@ const useTaskStore = create(
   devtools(
     persist(taskStore, {
       name: 'tasks',
+      storage: createJSONStorage(() => AsyncStorage),
     })
   )
 );

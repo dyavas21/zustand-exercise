@@ -39,10 +39,10 @@ const MainScreen = () => {
       <View style={styles.container}>
         <Text style={styles.title}>Today's Task</Text>
         <View style={styles.items}>
-          {tasks.map((task, id) => {
+          {/* {tasks.map(task => {
             return (
               <TouchableOpacity
-                key={id}
+                key={task.id}
                 onPress={() => {
                   removeTask(task.id);
                 }}
@@ -50,7 +50,20 @@ const MainScreen = () => {
                 <Task kata={task.title} />
               </TouchableOpacity>
             );
-          })}
+          })} */}
+          <FlatList
+            data={tasks}
+            keyExtractor={item => item.id}
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                onPress={() => {
+                  removeTask(item.id);
+                }}
+              >
+                <Task kata={item.title} />
+              </TouchableOpacity>
+            )}
+          />
         </View>
       </View>
       <KeyboardAvoidingView
