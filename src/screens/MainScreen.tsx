@@ -15,14 +15,15 @@ import {
 import Task from '../../components/Task';
 import useTaskStore from '../store/taskStore';
 
-const MainScreen = () => {
+const MainScreen = ({ navigation }) => {
   const addTask = useTaskStore(state => state.addTask);
 
   const [taskTitle, setTaskTitle] = useState('');
 
-  const { tasks, removeTask } = useTaskStore(state => ({
+  const { tasks, removeTask, updateTask } = useTaskStore(state => ({
     tasks: state.tasks,
     removeTask: state.removeTask,
+    updateTask: state.updateTask,
   }));
 
   const handleTaskSubmit = () => {
@@ -39,7 +40,7 @@ const MainScreen = () => {
       <View style={styles.container}>
         <Text style={styles.title}>Today's Task</Text>
         <View style={styles.items}>
-          {/* {tasks.map(task => {
+          {tasks.map(task => {
             return (
               <TouchableOpacity
                 key={task.id}
@@ -50,20 +51,21 @@ const MainScreen = () => {
                 <Task kata={task.title} />
               </TouchableOpacity>
             );
-          })} */}
-          <FlatList
+          })}
+          {/* <FlatList
             data={tasks}
             keyExtractor={item => item.id}
             renderItem={({ item }) => (
               <TouchableOpacity
                 onPress={() => {
-                  removeTask(item.id);
+                  //   removeTask(item.id);
+                  updateTask();
                 }}
               >
                 <Task kata={item.title} />
               </TouchableOpacity>
             )}
-          />
+          /> */}
         </View>
       </View>
       <KeyboardAvoidingView

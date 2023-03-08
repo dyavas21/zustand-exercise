@@ -25,8 +25,20 @@ const taskStore = set => ({
       tasks: state.tasks.filter(c => c.id !== taskId),
     }));
   },
+  updateTask: task =>
+    set(state => ({
+      tasks: state.tasks.map(item => {
+        if (item.id === task.id) {
+          return {
+            ...item,
+            title: taskTitle,
+          };
+        } else {
+          return item;
+        }
+      }),
+    })),
 });
-
 const useTaskStore = create(
   devtools(
     persist(taskStore, {
