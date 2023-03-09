@@ -25,13 +25,13 @@ const taskStore = set => ({
       tasks: state.tasks.filter(c => c.id !== taskId),
     }));
   },
-  updateTask: task =>
+  updateTask: taskId =>
     set(state => ({
       tasks: state.tasks.map(item => {
-        if (item.id === task.id) {
+        if (item.id === taskId) {
           return {
-            ...item,
-            title: taskTitle,
+            // ...state.item,
+            // title: state.task,
           };
         } else {
           return item;

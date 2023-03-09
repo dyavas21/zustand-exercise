@@ -46,6 +46,7 @@ const MainScreen = ({ navigation }) => {
                 key={task.id}
                 onPress={() => {
                   removeTask(task.id);
+                  //   updateTask(task.title);
                 }}
               >
                 <Task kata={task.title} />
